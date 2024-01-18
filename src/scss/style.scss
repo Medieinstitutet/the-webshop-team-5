@@ -1,97 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 2em;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Merriweather", serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  scroll-behavior: smooth;
+  scroll-padding: var(--scroll-padding, 5rem);
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
   }
-  a:hover {
-    color: #747bff;
+
+  h2 {
+    font-size: 1.1em;
   }
-  button {
-    background-color: #f9f9f9;
+
+  h3 {
+    font-size: 0.9em;
+  }
+
+  .landingPage {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right, rgba(208, 220, 251, 0.6), rgba(125, 130, 191, 0.6), rgba(220, 193, 245, 0.6)),
+      url("/src/img/shopping.jpg");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+
+    .navigation {
+      position: fixed;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100px;
+      z-index: 2000;
+      background-color: rgb(230, 230, 250);
+
+      .navList {
+        display: flex;
+        justify-content: space-evenly;
+        width: 80%;
+        list-style: none;
+        padding: 0;
+
+        li {
+          cursor: pointer;
+          color: rgb(56, 56, 56);
+        }
+      }
+
+      .navList li:hover {
+        font-weight: bold;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    .webshopTitle {
+      font-size: 6em;
+      color: white;
+    }
+
+    .shopNowButton {
+      cursor: pointer;
+      padding: 12px 45px;
+      border: solid white;
+      color: white;
+      background-color: rgba(125, 130, 191, 0.5);
+    }
+
+    .shopNowButton:hover {
+      background-color: transparent;
+    }
+
+    .shopNowButton:active {
+      background-color: rgba(125, 130, 191, 0.9);
+    }
+  }
+
+  .cartContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .popup {
+    top: 0;
+    right: 0;
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: crimson;
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  #productContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    width: 80%;
+    padding: 1em;
+
+    .itemContainer {
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5em;
+      box-shadow: 0px 0px 8px rgb(194, 192, 192);
+      text-align: center;
+
+      .productImage {
+        box-sizing: border-box;
+        width: 85%;
+        height: 250px;
+        vertical-align: middle;
+        padding: 1em;
+        border-radius: 8px;
+        object-fit: contain;
+        cursor: pointer;
+        transition: all ease-in-out 0.1s;
+      }
+
+      .productImage:hover {
+        box-shadow: inset 0px 0px 5px rgb(194, 192, 192);
+      }
+
+      #addToCartButton {
+        cursor: pointer;
+        padding: 12px 45px;
+        border: solid white;
+        color: white;
+        background-color: rgb(125, 130, 191);
+      }
+
+      #addToCartButton:hover {
+        background-color: rgba(125, 130, 191, 0.5);
+      }
+
+      #addToCartButton:active {
+        background-color: rgba(125, 130, 191, 0.8);
+      }
+    }
+  }
+
+  .display {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    top: 100px;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    z-index: 900;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    box-shadow: 0px 0px 10px rgb(194, 192, 192);
+
+    .cartItems {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .cartItemContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+        padding: 1em;
+        border-bottom: 1px solid grey;
+
+        .cartProductImage {
+          max-width: 100px;
+        }
+
+        .cartButtonContainer {
+          display: flex;
+          gap: 1em;
+
+          .cartButton {
+            cursor: pointer;
+            padding: 8px 20px;
+            border: none;
+            color: white;
+            background-color: rgb(125, 130, 191);
+          }
+
+          .cartButton:hover {
+            background-color: rgba(125, 130, 191, 0.5);
+          }
+
+          .cartButton:active {
+            background-color: rgba(125, 130, 191, 0.8);
+          }
+        }
+      }
+    }
+
+    .toCheckoutButton {
+      cursor: pointer;
+      padding: 12px 35px;
+      border: none;
+      color: white;
+      background-color: rgb(210, 135, 133);
+    }
+
+    .toCheckoutButton:hover {
+      background-color: rgba(210, 135, 133, 0.5);
+    }
+
+    .toCheckoutButton:active {
+      background-color: rgba(210, 135, 133, 0.8);
+    }
+  }
+
+  .hidden {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 100px;
+    right: -500%;
+    width: 500px;
+    height: 500px;
+    border: solid grey;
+    background-color: white;
+    z-index: 900;
+    overflow-y: scroll;
+    transition: right 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px rgb(194, 192, 192);
+  }
+
+  #modalContainer {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+
+    .modalContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      background-color: white;
+      margin: 20% auto;
+
+      padding: 20px;
+      width: 50%;
+
+      #modalContentItems {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        align-items: center;
+        width: 100%;
+        box-shadow: 0px 0px 10px rgb(194, 192, 192);
+        padding: 1em;
+
+        .modalImage {
+          width: 150px;
+        }
+      }
+
+      #modalCloseButton {
+        cursor: pointer;
+        padding: 12px 45px;
+        border: solid white;
+        color: white;
+        background-color: rgb(125, 130, 191);
+      }
+
+      #modalCloseButton:hover {
+        background-color: rgba(125, 130, 191, 0.5);
+      }
+
+      #modalCloseButton:active {
+        background-color: rgba(125, 130, 191, 0.8);
+      }
+    }
   }
 }
